@@ -1,8 +1,13 @@
 # analysis/utils.py
 import requests
 import json
+import logging
 
-OPENROUTER_API_KEY = "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"
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+OPENROUTER_API_KEY = "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"
 
 def generate_summary_from_llm(prompt):
     try:
@@ -22,8 +27,14 @@ def generate_summary_from_llm(prompt):
                         "content": prompt
                     }
                 ]
-            })
+            }),
+            timeout=15  # Add timeout to prevent hanging
         )
+        
+        # Print response code and preview for debugging
+        print(f"Response status: {response.status_code}")
+        print(f"Response preview: {response.text[:200]}")
+        
         response_data = response.json()
         return response_data['choices'][0]['message']['content']
     except Exception as e:
