@@ -4,7 +4,6 @@ import json
 
 OPENROUTER_API_KEY = "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"
 
-
 def generate_summary_from_llm(prompt):
     try:
         response = requests.post(
