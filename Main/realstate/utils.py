@@ -28,10 +28,21 @@ def generate_summary_from_llm(prompt):
                         "content": prompt
                     }
                 ]
-            })
+            }),
+            timeout=15  # Add timeout to prevent hanging
         )
+        
+        # Print response code and preview for debugging
+        print(f"Response status: {response.status_code}")
+        print(f"Response preview: {response.text[:200]}")
+        
         response_data = response.json()
         print("Status code:", response_data)
         return response_data['choices'][0]['message']['content']
     except Exception as e:
-        return "LLM summary could not be generated."
+        # Print the exception details for debugging
+        print(f"Error in API call: {str(e)}")
+        logger.error(f"LLM API Error: {str(e)}")
+        
+        # Return fallback summary with error message
+        return f"LLM summary could not be generated. Error: {str(e)}"
