@@ -2,7 +2,7 @@
 import requests
 import json
 
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 def generate_summary_from_llm(prompt):
     try:
