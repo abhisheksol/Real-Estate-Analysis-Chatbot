@@ -27,4 +27,9 @@ def generate_summary_from_llm(prompt):
         response_data = response.json()
         return response_data['choices'][0]['message']['content']
     except Exception as e:
-        return "LLM summary could not be generated."
+        # Print the exception details for debugging
+        print(f"Error in API call: {str(e)}")
+        logger.error(f"LLM API Error: {str(e)}")
+        
+        # Return fallback summary with error message
+        return f"LLM summary could not be generated. Error: {str(e)}"
