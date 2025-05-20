@@ -7,7 +7,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 def generate_summary_from_llm(prompt):
     try:
